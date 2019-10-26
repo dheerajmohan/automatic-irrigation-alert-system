@@ -6,14 +6,17 @@ import time # This is the time library, we need this so we can use the sleep fun
 import requests
 
 url = "https://www.fast2sms.com/dev/bulk"
+
+# Edit the authorization key to your actual key obtained after creating an account in www.fast2sms.com
 headers = {
-'authorization': "12Ci3obr8sPpz4q0UuHELIWB7m9Xawt5SGxVfDe6ThJdKOkYgynckhlP6grHQvsw9UB8SzbuAe2iCLWx",
+'authorization': "12Ci3obr8sPpz4q0U****kYgynckhlP6grHQvsw9UB8SzbuAe2iCLWx",
 'Content-Type': "application/x-www-form-urlencoded",
 'Cache-Control': "no-cache",
 }
 
+# Edit the phone number to the receiver number
 def sendMessage(message):
-    payload = "sender_id=FSTSMS&message="+message+"&language=english&route=p&numbers=7012049065,8606667384,7012264191,9495022580"
+    payload = "sender_id=FSTSMS&message="+message+"&language=english&route=p&numbers=7012******"
     response = requests.request("POST", url, data=payload, headers=headers)
     print(response.text)
 
@@ -23,10 +26,10 @@ def callback(channel):
     print(GPIO.input(channel))
     if GPIO.input(channel):
         print ("LED off")
-        sendMessage("EVS Demo: Low water level! Water the plant immediately!!")
+        sendMessage("Low water level! Water the plant immediately!!")
     else:
         print ("LED on")
-        sendMessage("EVS Demo: Water level back to normal")
+        sendMessage("Water level back to normal")
 
 # Set our GPIO numbering to BCM
 GPIO.setmode(GPIO.BCM)
